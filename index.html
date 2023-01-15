@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+
+    <!-- TODO : Replace with Bootstrap  -->
+    <style>
+        .note-item {
+            border: 1px solid;
+            border-radius: 20px;
+            width: 200px;
+            height: 50px;
+        }
+
+        .note-item {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Note App with Javascript</h1>
+    <!-- List of notes -->
+    <ul class="notes">
+        <li class="note-item">
+            <a href="#" class="note-link">
+                <h2 class="note-title">Title test</h2>
+                <p class="note-body">Body test</p>
+                <button type="button">Delete me</button>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Display the writting part -->
+    <form method="get" id="noteForm">
+        <label for="noteTitle">
+            <input type="text" name="note_title" id="noteTitle" placeholder="Title...">
+        </label>
+        <textarea name="note_body" id="noteBody" cols="30" rows="10" placeholder="Your text note..."></textarea>
+        <button type="submit" id="addButton">Add new note</button>
+
+        <!-- Coming feature :  Delete a note -->
+        <!-- <button type="button" id="deleteButton">Delete note</button> -->
+    </form>
+
+    <!-- Templates -->
+    <template id="noteTemplate">
+        <li class="note-item">
+            <a href="#" class="note-link">
+                <h2 class="note-title">Title</h2>
+                <p class="note-body">Body</p>
+                <button type="button">Delete me</button>
+            </a>
+        </li>
+    </template>
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>
