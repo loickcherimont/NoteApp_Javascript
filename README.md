@@ -9,5 +9,5 @@ A simple note app using Javascript
 <!-- ## How to run -->
 ## Todo
 - [ ] Add option modify on created notes
-- [ ] Allow note deletion on list and form
+- [x] Allow note deletion on list
 - [ ] Style with Bootstrap the application
