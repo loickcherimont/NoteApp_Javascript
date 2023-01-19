@@ -13,9 +13,6 @@
             border-radius: 20px;
             width: 200px;
             height: 50px;
-        }
-
-        .note-item {
             display: block;
             width: 100%;
             height: 100%;
@@ -25,15 +22,7 @@
 <body>
     <h1>Simple Note App with Javascript</h1>
     <!-- List of notes -->
-    <ul class="notes">
-        <li class="note-item">
-            <a href="#" class="note-link">
-                <h2 class="note-title">Title test</h2>
-                <p class="note-body">Body test</p>
-                <button type="button">Delete me</button>
-            </a>
-        </li>
-    </ul>
+    <ul class="notes"></ul>
 
     <!-- Display the writting part -->
     <form method="get" id="noteForm">
@@ -42,6 +31,8 @@
         </label>
         <textarea name="note_body" id="noteBody" cols="30" rows="10" placeholder="Your text note..."></textarea>
         <button type="submit" id="addButton">Add new note</button>
+
+        <!-- TODO : Button to modify note content -->
 
         <!-- Coming feature :  Delete a note -->
         <!-- <button type="button" id="deleteButton">Delete note</button> -->
@@ -53,8 +44,8 @@
             <a href="#" class="note-link">
                 <h2 class="note-title">Title</h2>
                 <p class="note-body">Body</p>
-                <button type="button">Delete me</button>
             </a>
+            <button type="button" class="delete-note">Delete me</button>
         </li>
     </template>
     <script src="./js/main.js" type="module"></script>
