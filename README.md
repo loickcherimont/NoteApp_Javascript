@@ -8,6 +8,9 @@ A simple note app using Javascript
 
 <!-- ## How to run -->
 ## Todo
-- [ ] Add option modify on created notes
+- [x] Add option modify on created notes
 - [x] Allow note deletion on list
-- [ ] Style with Bootstrap the application
+- [x] Style with Bootstrap the application
+- Bug : Fix modify option
+- Bug : Prevent empty notes
+- Bug : Fix delete option
