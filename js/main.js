@@ -1,8 +1,10 @@
-import { addNote, displayNote } from "./functions.js";
+import { addNote, displayNote, modifyNote } from "./functions.js";
 
-// Add new notes with button 
 document.querySelector('#noteForm')
         .addEventListener('submit', addNote);
 
 document.querySelectorAll('.note-item')
         .forEach(displayNote);
+
+document.querySelector('#modifyButton')
+        .addEventListener('click', modifyNote)
