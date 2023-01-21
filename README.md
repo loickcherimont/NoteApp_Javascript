@@ -1,16 +1,14 @@
-# Note App
+# Take a note!
 
 ## Introduction
 A simple note app using Javascript
 
 ## Prerequisites
 - Javascript
+- CDN Bootstrap
 
 <!-- ## How to run -->
 ## Todo
-- [x] Add option modify on created notes
-- [x] Allow note deletion on list
-- [x] Style with Bootstrap the application
-- Bug : Fix modify option
-- Bug : Prevent empty notes
-- Bug : Fix delete option
+CODE STRUCTURE!
+- [ ] Replace *querySelectorAll* in `main.js` by *querySelector*
+- [ ] Fix delete option -> EXPECTED. Delete note, don't allow modify option
