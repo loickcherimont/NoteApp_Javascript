@@ -1,142 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/general.css">
+  <!-- <style>
+    .note-item {
+      border: 1px solid;
+      border-radius: 20px;
+      /* width: 18rem; */
+      height: 50px;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
 
-    <!-- TODO : Replace with Bootstrap  -->
-    <style>
-        .note-item {
-            border: 1px solid;
-            border-radius: 20px;
-            width: 200px;
-            height: 50px;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
+    .note-item.is-selected {
+      background: #20c997;
+      color: white;
+    }
 
-        .note-item.is-selected {
-            background: #20c997;
-            color: white;
-        }
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
 
-        .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          user-select: none;
-        }
-  
-        @media (min-width: 768px) {
-          .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-          }
-        }
-  
-        .b-example-divider {
-          height: 3rem;
-          background-color: rgba(0, 0, 0, .1);
-          border: solid rgba(0, 0, 0, .15);
-          border-width: 1px 0;
-          box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-  
-        .b-example-vr {
-          flex-shrink: 0;
-          width: 1.5rem;
-          height: 100vh;
-        }
-  
-        .bi {
-          vertical-align: -.125em;
-          fill: currentColor;
-        }
-  
-        .nav-scroller {
-          position: relative;
-          z-index: 2;
-          height: 2.75rem;
-          overflow-y: hidden;
-        }
-  
-        .nav-scroller .nav {
-          display: flex;
-          flex-wrap: nowrap;
-          padding-bottom: 1rem;
-          margin-top: -1px;
-          overflow-x: auto;
-          text-align: center;
-          white-space: nowrap;
-          -webkit-overflow-scrolling: touch;
-        }
-    </style>
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style> -->
 </head>
+
 <body>
-    <div class="container px-4 py-5" id="custom-cards">
-        <h1 class="pb-2 border-bottom">Note App</h1>
-
-
-    <!-- List of notes -->
-    <!-- <ul class="notes"></ul> -->
-    <div class="notes row row-cols-1 row-cols-md-2 g-4">
+  <div class="container px-4 py-5">
+    <h1 class="mb-5 pb-2 border-bottom">Take a Note &#x1F4DD;!</h1>
+    <div class="alert alert-danger d-none" role="alert" id="emptyAlert">
+      <h4 class="alert-heading">Empty note!</h4>
+      <p>Sorry, notes are required!</p>
     </div>
 
-    <!-- Display the writting part -->
-    <form method="get" id="noteForm">
-        <label for="noteTitle">
-            <input type="text" name="note_title" id="noteTitle" placeholder="Title...">
-        </label>
-        <textarea name="note_body" id="noteBody" cols="30" rows="10" placeholder="Your text note..."></textarea>
+
+    <div class="d-flex justify-content-between container">
+      <!-- List of notes -->
+      <div class="notes row row-cols-1 row-cols-md-3 g-4 border">
+      </div>
+
+      <!-- Note creator -->
+      <form method="get" id="noteForm" class="p-3 mt-5 border">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="note_title" id="noteTitle" placeholder="placeholder">
+          <label for="noteTitle">Title</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <textarea class="form-control" name="note_body" id="noteBody" cols="30" rows="10"
+            placeholder="Your text note..." style="height: 100px; resize:none"></textarea>
+          <label for="noteBody">Some notes</label>
+        </div>
         <button type="submit" id="addButton" class="btn btn-primary">Add new note</button>
         <!-- By default is hidden
             And appears if user selects a created note
         -->
         <button type="button" id="modifyButton" class="btn btn-success d-none">Modify</button>
-
-        <!-- TODO : Button to modify note content -->
-
-        <!-- Coming feature :  Delete a note -->
-        <!-- <button type="button" id="deleteButton">Delete note</button> -->
-    </form>
-
-    <!-- Templates -->
-    <template id="noteTemplate">
-        <div class="note-item col">
-            <div class="card">
-                  <div class="card-body">
-                      <a href="#" class="note-link">
-                          <h5 class="note-title card-title">Card title</h5>
-                      <p class="note-body card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      </a>    
-                      <button type="button" class="btn btn-danger delete-note">Delete me</button>
-  
-                  </div>
-            </div>
-          </div>
-          <!-- *** ANCIENT VERSIONS OF NOTE ITEM *** -->
-        <!-- <li class="note-item">
-            <a href="#" class="note-link">
-                <h2 class="note-title">Title</h2>
-                <p class="note-body">Body</p>
-            </a>
-            <button type="button" class="btn btn-danger delete-note">Delete me</button>
-        </li> -->
-        <!-- <div class="note-item col">
-            <a href="#" class="note-link card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                    <h3 class="note-title pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h3>
-                    <p class="note-body">Text content</p>
-                  </div>
-            </a>
-          </div> -->
-    </template>
+      </form>
     </div>
-    <script src="./js/main.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+
+  <!-- Templates -->
+  <template id="noteTemplate">
+    <div class="note-item card me-3 col-3" style="cursor: pointer; width: 180px;">
+      <div class="card-body">
+        <!-- <a href="#" class="note-link"> -->
+          <h5 class="note-title card-title">Title</h5>
+          <p class="note-body card-text">Some notes</p>
+        <!-- </a> -->
+        <button type="button" class="btn btn-danger delete-note">Delete me</button>
+      </div>
+    </div>
+  </template>
+  <script src="./js/main.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
