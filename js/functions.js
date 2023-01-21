@@ -9,11 +9,15 @@ export function addNote(e) {
 
     e.preventDefault();
 
-    
-
     const noteForm = new FormData(this);
 
     const [noteTitle, noteBody] = noteForm.values();
+
+    const isEmpty = noteIsEmpty(noteTitle, noteBody);
+
+    if(isEmpty) {
+        return;
+    }
 
     // Get note item from a template
     const noteItem = document
@@ -41,11 +45,12 @@ export function addNote(e) {
 }
 
 export function displayNote(noteItem) {
+    // console.log(noteItem);
     noteItem
-        .querySelector('.note-link')
+        // .querySelector('.note-link')
         .addEventListener('click', e => {
 
-            showSelectedNote(e.currentTarget.parentNode);
+            showSelectedNote(e.currentTarget);
 
         // Fetch data from list and display them in form
         let titleContentList = e.currentTarget.querySelector('.note-title').innerText;
@@ -61,8 +66,48 @@ export function displayNote(noteItem) {
 }
 
 export function deleteNote(e) {
-    e.currentTarget.parentNode.remove();
+    const noteItem = e.currentTarget.parentNode.parentNode;
+    noteItem.remove();
 }
+
+
+
+/**
+ * Display to user the selected note with in different style
+ * of the other
+ */
+function showSelectedNote(noteItemFromList) {
+    document
+        .querySelectorAll('.note-item')
+        .forEach(noteItem => {
+            noteItem.classList.remove('is-selected');
+        })
+    console.log(noteItemFromList);
+    noteItemFromList.classList.add('is-selected');
+}
+
+/**
+ * @function noteIsEmpty
+ * 
+ * Check if user sent an empty note
+ * Returns true if note is empty and a message 
+ * 
+ * @param {string} noteTitle 
+ * @param {string} noteBody 
+ * @returns {boolean}  
+ */
+function noteIsEmpty(noteTitle, noteBody) {
+    const emptyAlert = document.getElementById('emptyAlert');
+    if(!noteTitle && !noteBody) {
+        emptyAlert.classList.remove('d-none');
+        return true;
+    } else {
+        emptyAlert.classList.add('d-none');
+        return false;
+    }
+}
+
+// MODIFY OPTION
 
 /**
  * @function unlockModifyOption
@@ -73,7 +118,7 @@ function unlockModifyOption() {
     document.querySelector('#modifyButton').classList.remove('d-none');
 }
 
-export function modifyNote(e) {
+export function modifyNote() {
 
     let titleContent = document.querySelector('#noteTitle').value;
     let bodyContent = document.querySelector('#noteBody').value;
@@ -87,18 +132,15 @@ export function modifyNote(e) {
     document.forms[0].reset();
 
     // Lock modify option
-    document.querySelector('#modifyButton').classList.add('d-none');
+    disableModify();
 }
 
 /**
- * Display to user the selected note with in different style
- * of the other
+ * @function disableModify
+ * 
+ * Lock modify option 
+ * 
  */
-function showSelectedNote(noteItemFromList) {
-    document
-        .querySelectorAll('.note-item')
-        .forEach(noteItem => {
-            noteItem.classList.remove('is-selected');
-        })
-    noteItemFromList.classList.add('is-selected');
+function disableModify() {
+    document.querySelector('#modifyButton').classList.add('d-none');
 }
