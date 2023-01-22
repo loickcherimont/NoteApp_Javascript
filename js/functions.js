@@ -1,3 +1,5 @@
+import { createNoteItem } from "./components/note.js";
+
 /**
  * @function addNewNote
  * 
@@ -9,82 +11,59 @@ export function addNote(e) {
 
     e.preventDefault();
 
-    const noteForm = new FormData(this);
+    // Fetch data from form
+    const [noteTitle, noteBody] = getNoteData();
 
-    const [noteTitle, noteBody] = noteForm.values();
-
+    // Check if entries are empty
     const isEmpty = noteIsEmpty(noteTitle, noteBody);
 
     if(isEmpty) {
         return;
     }
 
-    // Get note item from a template
-    const noteItem = document
-                        .getElementById('noteTemplate')
-                        .content
-                        .cloneNode(true)
-                        .querySelector('.note-item');
-
-    // console.dir(noteItem.innerHTML);
-
-
-    // Complete the item with the data
-    noteItem.querySelector('.note-title').innerText = noteTitle;
-    noteItem.querySelector('.note-body').innerText = noteBody;
-    noteItem.querySelector('.delete-note').addEventListener('click', deleteNote);
+    // With user data
+    const noteItem = createNoteItem(noteTitle, noteBody);
 
     // Allow user consult his/her notes
-    // Or delete created note
-    displayNote(noteItem);
-
-    document.querySelector('.notes').appendChild(noteItem);
+    document.querySelector('#notes').appendChild(noteItem);
 
     // Reset form after data submit
     this.reset();
 }
 
-export function displayNote(noteItem) {
-    // console.log(noteItem);
-    noteItem
-        // .querySelector('.note-link')
-        .addEventListener('click', e => {
+/**
+ * Fetch title and body texts from a note
+ * Display them in the form
+ * @param {HTMLElement} noteItem 
+ */
+export function fetchNote(e) {
+    const selectedNote = e.currentTarget;
 
-            showSelectedNote(e.currentTarget);
+    // Display selected note from the list
+    UiDisplay(selectedNote);
 
-        // Fetch data from list and display them in form
-        let titleContentList = e.currentTarget.querySelector('.note-title').innerText;
-        let bodyContentList = e.currentTarget.querySelector('.note-body').innerText;
+    let selectedTitle = selectedNote.querySelector('.note-title').innerText;
+    let selectedBody = selectedNote.querySelector('.note-body').innerText;
+    
+    const noteForm = document.getElementById('noteForm')
+    noteForm.querySelector('#noteTitle').value = selectedTitle;
+    noteForm.querySelector('#noteBody').value = selectedBody;
 
-        document.forms[0].querySelector('#noteTitle').value = titleContentList;
-        document.forms[0].querySelector('#noteBody').value = bodyContentList;
-
-        unlockModifyOption();
-
-
-    });
+    // Allow user modify
+    unlockModifyOption();
 }
 
+/**@todo Prevent form keep data if user want to delete it */
 export function deleteNote(e) {
+    const noteForm = document.getElementById('noteForm')
+
+    // noteForm.querySelector('#noteTitle').value = "DELETE_TITLE";
+    // noteForm.querySelector('#noteBody').value = "DELETE_BODY";
+
     const noteItem = e.currentTarget.parentNode.parentNode;
     noteItem.remove();
 }
 
-
-
-/**
- * Display to user the selected note with in different style
- * of the other
- */
-function showSelectedNote(noteItemFromList) {
-    document
-        .querySelectorAll('.note-item')
-        .forEach(noteItem => {
-            noteItem.classList.remove('is-selected');
-        })
-    console.log(noteItemFromList);
-    noteItemFromList.classList.add('is-selected');
-}
 
 /**
  * @function noteIsEmpty
@@ -143,4 +122,31 @@ export function modifyNote() {
  */
 function disableModify() {
     document.querySelector('#modifyButton').classList.add('d-none');
+}
+
+/**
+ * Fetch data from form
+ * @returns {string} Title and Body
+ */
+function getNoteData() {
+    const noteForm = new FormData(document.getElementById('noteForm'));
+    let noteTitle = noteForm.get('note_title');
+    let noteBody = noteForm.get('note_body');
+    return [noteTitle, noteBody];
+}
+
+/**
+ * Display selected note 
+ * In an different style from the other
+ * @param {HTMLElement} selectedNote 
+ */
+function UiDisplay(selectedNote) {
+    const notes = document
+                    .querySelectorAll('.note-item');
+
+    notes.forEach(note => {
+        note.classList.remove('is-selected');
+    })
+    
+    selectedNote.classList.add('is-selected');
 }
