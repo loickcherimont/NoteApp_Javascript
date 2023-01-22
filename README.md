@@ -10,5 +10,5 @@ A simple note app using Javascript
 <!-- ## How to run -->
 ## Todo
 CODE STRUCTURE!
-- [ ] Replace *querySelectorAll* in `main.js` by *querySelector*
-- [ ] Fix delete option -> EXPECTED. Delete note, don't allow modify option
+- [x] Replace *querySelectorAll* in `main.js` by *querySelector*
+- (Doing...) Fix delete option -> EXPECTED. Delete note, don't allow modify option
