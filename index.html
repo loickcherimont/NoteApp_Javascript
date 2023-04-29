@@ -1,62 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Note App - Vanilla JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<!-- CUSTOM CSS -->
+	<link rel="stylesheet" href="./styles/general.css">
+  </head>
+  <body>
+	<div class="app container d-flex flex-column justify-content-around" id="App">
+		<!-- FILTER_BAR: Allow user to find a note using its title -->
+		<div class="input-group mb-3 p-3 filterbar">
+			<!-- <div class="col d-flex"> -->
+				<input type="search" class="form-control filterbar-input border-0" placeholder="Search for a note..." aria-label="Search for a note" aria-describedby="searchForNote">
+				<button class="btn btn-primary filterbar-btn" type="button" id="searchForNote"><i class="bi bi-search"></i></button>
+			<!-- </div> -->
+			
+		</div>
+		
+		<!-- UI help to indicate user the success/failure of the procedures hidden by default-->
+		<div class="ui-indicator d-none" id="uiIndicator">
+			<p class="alert alert-success" role="alert" id="uiIndicator">
+			<i class="bi bi-check2-circle"></i> Success
+			</p>
+			<p class="alert alert-danger" role="alert" id="uiIndicator">
+			<i class="bi bi-x-circle"></i> Failure
+			</p>
+		</div>
+		
+		<div class="noteinterface row">
+			<!-- NOTEINTERFACE_HEADER: Content a simple title between {My notes, "Note App" or "Take a note"} -->
+			<header class="noteinterface-header mb-5 pb-2 mb-4  d-grid gap-2 d-md-block border-bottom border-dark">
+				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note"><i class="bi bi-plus-square"></i></a></h1>
+			</header>
+			
+			
+			
+			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
+			<section class="noteinterface-body row d-flex">
+				<!-- NOTEITEM : Content a title and a body -->
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+					<div class="card border-0 shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Note Title</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+					<div class="card border-0 shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Note Title</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+					<div class="card border-0 shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Note Title</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-12 mb-2">
+					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Note Title</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-12 mb-2">
+					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Note Title</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
+			</section>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Note App</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles/general.css">
-</head>
-
-<body>
-  <div class="container px-4 py-5">
-    <h1 class="mb-5 pb-2 border-bottom">Take a Note &#x1F4DD;!</h1>
-    <div class="alert alert-danger d-none" role="alert" id="emptyAlert">
-      <h4 class="alert-heading">Empty note!</h4>
-      <p>Sorry, notes are required!</p>
-    </div>
-
-
-    <div class="d-flex justify-content-between container">
-      <!-- List of notes -->
-      <div class="notes row row-cols-1 row-cols-md-3 g-4 border" id="notes">
+<!-- Modal use for note edit -->
+<div class="modal fade" id="modalNote" tabindex="-1" aria-labelledby="modalNoteLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="modalNoteLabel">Start typing!</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <!-- Note creator -->
-      <form method="get" id="noteForm" class="p-3 mt-5 border">
-        <div class="form-floating mb-3">
-          <input type="text" class="form-control" name="note_title" id="noteTitle" placeholder="placeholder">
-          <label for="noteTitle">Title</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <textarea class="form-control" name="note_body" id="noteBody" cols="30" rows="10"
-            placeholder="Your text note..." style="height: 100px; resize:none"></textarea>
-          <label for="noteBody">Some notes</label>
-        </div>
-        <button type="submit" id="addButton" class="btn btn-primary">Add new note</button>
-        <!-- By default is hidden
-            And appears if user selects a created note
-        -->
-        <button type="button" id="modifyButton" class="btn btn-success d-none">Modify</button>
-      </form>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Your note</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"><i class="bi bi-pencil"></i></button>
+        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+      </div>
     </div>
   </div>
+</div>
+		
+		</div>
+	
 
-  <!-- Templates -->
-  <template id="noteTemplate">
-    <div class="note-item card me-3 col-3" style="cursor: pointer; width: 180px;">
-      <div class="card-body">
-          <h5 class="note-title card-title">Title</h5>
-          <p class="note-body card-text">Some notes</p>
-        <button type="button" class="btn btn-danger delete-note">Delete me</button>
-      </div>
-    </div>
-  </template>
-  <script src="./js/main.js" type="module"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+	<footer class="py-3 my-4 border-top">
+		<p class="text-center text-muted ">&copy; 2023 Loick Cherimont</p>
+	</footer>
+	</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
 </html>
