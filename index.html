@@ -34,6 +34,10 @@
 			<!-- NOTEINTERFACE_HEADER: Content a simple title between {My notes, "Note App" or "Take a note"} -->
 			<header class="noteinterface-header mb-5 pb-2 mb-4  d-grid gap-2 d-md-block border-bottom border-dark">
 				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note"><i class="bi bi-plus-square"></i></a></h1>
+				<a class="btn btn-primary" role="button" title="Display the archives" id="archivesBtn">Archives</a>
+				
+				<!-- By default, actual is active -->
+				<a class="btn btn-primary active" role="button" title="Display the archives" id="ActualBtn" aria-pressed="true">Actual</a>
 			</header>
 			
 			
@@ -41,7 +45,7 @@
 			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
 			<section class="noteinterface-body row d-flex">
 				<!-- NOTEITEM : Content a title and a body -->
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
 					<div class="card border-0 shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -50,7 +54,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
 					<div class="card border-0 shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -59,7 +63,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
 					<div class="card border-0 shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -68,7 +72,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-12 mb-2">
+				<div class="col-lg-3 col-md-6 col-12 mb-3">
 					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -77,7 +81,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-12 mb-2">
+				<div class="col-lg-3 col-md-6 col-12 mb-3">
 					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -109,8 +113,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"><i class="bi bi-pencil"></i></button>
-        <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+		<div class="form-check">
+			<label class="form-check-label" for="addToArchives">Move to Archives</label>
+			<input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives">
+		</div>
+        <button type="button" class="btn btn-primary" title="Edit the note"><i class="bi bi-pencil"></i></button>
+        <button type="button" class="btn btn-danger" title="Delete the note"><i class="bi bi-trash"></i></button>
       </div>
     </div>
   </div>
