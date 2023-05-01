@@ -5,7 +5,7 @@
 
     Ex: Todo_ReactJS 
 -->
-# ModelReadme_Language
+# NoteApp_Javascript
 
 ![MainImageForProject](https://placehold.co/500x300)
 
@@ -27,9 +27,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
     - Bootstrap 5.2.0-beta1
 -->
 ## :wrench: Tools
-- Lorem X.XX.XXX
-- Lorem X.XX.XXX
-- Lorem X.XX.XXX
+- Javascript ES6
+- Bootstrap 5
 
 <!-- 
     PREREQUISITES
@@ -93,9 +92,21 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 -->
 
 ## :rocket: Features
-- Lorem ipsum dolor sit amet
-- Lorem ipsum dolor sit amet
-- Lorem ipsum dolor sit amet
+<!-- Note Item -->
+- Create a new note with `+ button`
+- Display to user directy the modal when a new note is created
+- Delete the target note from the board when user selects `basket button` and close the modal
+- Confirm the deletion before delete the note
+
+<!-- UI Helpers -->
+- Find an existing note using the *filterbar*
+- Display to an UI helper when the action is released
+
+<!-- Note Interface -->
+- Add 2 parts: **Archives** and **Actual**
+- (Save the board in localstorage)
+- Display partially in the board the note when user selects `pencil button` : note title, a part of the note body
+- Delete the target note from the board when user selects `basket button` and close the modal
 
 <!-- 
     LICENSE
@@ -106,6 +117,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
  -->
 
 ## :key: License
-Lorem ipsum dolor sit amet  
-Lorem ipsum dolor sit amet
+Made by Loïck Chérimont  
+Under "Lorem ipsum"
 
