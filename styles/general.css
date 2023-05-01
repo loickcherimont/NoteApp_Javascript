@@ -12,6 +12,10 @@ body {
 	height: 100vh;
 }
 
+.form-check * {
+	cursor: pointer;
+}
+
 /* Animations/Effect on card and input */	
 .card {
 	transition: transform 500ms ease-out;
