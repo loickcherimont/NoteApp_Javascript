@@ -27,7 +27,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
     - Bootstrap 5.2.0-beta1
 -->
 ## :wrench: Tools
-- Javascript ES6
+- Javascript 
 - Bootstrap 5
 
 <!-- 
@@ -93,12 +93,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 
 ## :rocket: Features
 <!-- Note Item -->
-- Create a new note with `+ button`
-- Display to user directy the modal when a new note is created
+- ~~Display to user directy the modal when a new note is created~~
 - Delete the target note from the board when user selects `basket button` and close the modal
 - Confirm the deletion before delete the note
 
 <!-- UI Helpers -->
+- Create a new note with `+ button`
 - Find an existing note using the *filterbar*
 - Display to an UI helper when the action is released
 
@@ -107,6 +107,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 - (Save the board in localstorage)
 - Display partially in the board the note when user selects `pencil button` : note title, a part of the note body
 - Delete the target note from the board when user selects `basket button` and close the modal
+
+TO FIX!!! 
+There are more than a unique `#modalNote` id
 
 <!-- 
     LICENSE
