@@ -33,7 +33,13 @@
 		<div class="noteinterface row">
 			<!-- NOTEINTERFACE_HEADER: Content a simple title between {My notes, "Note App" or "Take a note"} -->
 			<header class="noteinterface-header mb-5 pb-2 mb-4  d-grid gap-2 d-md-block border-bottom border-dark">
-				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note"><i class="bi bi-plus-square"></i></a></h1>
+				<!-- <h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-plus-square"></i></a></h1> -->
+				
+				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote" href="#"><i class="bi bi-plus-square"></i></a></h1>
+				
+				<!-- Model -->
+				<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+				
 				<a class="btn btn-primary" role="button" title="Display the archives" id="archivesBtn">Archives</a>
 				
 				<!-- By default, actual is active -->
@@ -43,9 +49,9 @@
 			
 			
 			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
-			<section class="noteinterface-body row d-flex">
+			<section class="noteinterface-body row d-flex" id="noteInterfaceBody">
 				<!-- NOTEITEM : Content a title and a body -->
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-3" >
 					<div class="card border-0 shadow-sm w-75 mx-auto">
 						<div class="card-body">
 							<h5 class="card-title">Note Title</h5>
@@ -54,42 +60,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-					<div class="card border-0 shadow-sm w-75 mx-auto">
-						<div class="card-body">
-							<h5 class="card-title">Note Title</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
-					<div class="card border-0 shadow-sm w-75 mx-auto">
-						<div class="card-body">
-							<h5 class="card-title">Note Title</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-12 mb-3">
-					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
-						<div class="card-body">
-							<h5 class="card-title">Note Title</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-12 mb-3">
-					<div class="card border-0 bg-white shadow-sm w-75 mx-auto">
-						<div class="card-body">
-							<h5 class="card-title">Note Title</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-				</div>
+				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3"> -->
+					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <h5 class="card-title">Note Title</h5> -->
+							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
+							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
+				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3"> -->
+					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <h5 class="card-title">Note Title</h5> -->
+							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
+							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
+				<!-- <div class="col-lg-3 col-md-6 col-12 mb-3"> -->
+					<!-- <div class="card border-0 bg-white shadow-sm w-75 mx-auto"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <h5 class="card-title">Note Title</h5> -->
+							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
+							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
+				<!-- <div class="col-lg-3 col-md-6 col-12 mb-3"> -->
+					<!-- <div class="card border-0 bg-white shadow-sm w-75 mx-auto"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <h5 class="card-title">Note Title</h5> -->
+							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
+							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
 			</section>
 
 <!-- Modal use for note edit -->
@@ -100,15 +106,17 @@
         <h2 class="modal-title fs-5" id="modalNoteLabel">Start typing!</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form>
+      <div class="modal-body">	  
+        
+		<!-- NoteUI to edit/delete/archive a note -->
+		<form id="noteUI" name="note_ui" method="get">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="noteTitle" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="noteTitle" name="note_title" value="">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Your note</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="noteBody" class="col-form-label">Your note</label>
+            <textarea class="form-control" id="noteBody" name="note_body" value=""></textarea>
           </div>
         </form>
       </div>
@@ -117,8 +125,8 @@
 			<label class="form-check-label" for="addToArchives">Move to Archives</label>
 			<input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives">
 		</div>
-        <button type="button" class="btn btn-primary" title="Edit the note"><i class="bi bi-pencil"></i></button>
-        <button type="button" class="btn btn-danger" title="Delete the note"><i class="bi bi-trash"></i></button>
+        <button type="submit" class="btn btn-primary" title="Edit the note" id="editBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
+        <button type="button" class="btn btn-danger" title="Delete the note" id="deleteBtn"><i class="bi bi-trash"></i></button>
       </div>
     </div>
   </div>
@@ -132,5 +140,9 @@
 	</footer>
 	</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	<!-- Waiting for a stable localhost -->
+	<!-- <script src="./scripts/app.js" type="module"></script> -->
+	
+	<script src="./scripts/app.js"></script>
   </body>
 </html>
