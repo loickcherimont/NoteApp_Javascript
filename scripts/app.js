@@ -3,9 +3,21 @@ class UI {
 	
 	#notes = [];
 	#modal;
+	#targetNote;
+	
+	hideBtns () {
+		const modifyBtn = document.getElementById("modifyBtn");
+		const deleteBtn = document.getElementById("deleteBtn");
+		
+		modifyBtn.classList.add("d-none");
+		deleteBtn.classList.add("d-none");
+		
+		const form = document.getElementById("noteUI");
+		form.reset();
+	}
 	
 	createNoteItem() {
-		console.log("test");
+		
 		const noteData = new FormData(document.getElementById("noteUI"));
 		const noteItem = new NoteItem();
 		
@@ -35,36 +47,27 @@ class UI {
 		document.getElementById("noteInterfaceBody").prepend(noteUIItem);
 		document.getElementById("noteUI").reset();
 		this.setNotes = {id, title, body, edited:true};
+		alert("New note created!");
 	}
 	
 	fetchExistingData(note) {
 		const {title, body} = note;
+		
+		this.setTargetNote = note;
 		
 		const modal = document.getElementById("modalNote");
 		
 		modal.querySelector("#noteTitle").value = title;
 		modal.querySelector("#noteBody").value = body;
 		
-		const modifyBtn = document.createElement("button");
-		modifyBtn.setAttribute("type", "button");
-		modifyBtn.setAttribute("class", "btn btn-success");
-		modifyBtn.setAttribute("title", "Modify the note");
-		modifyBtn.setAttribute("data-bs-dismiss", "modal");
-		modifyBtn.innerHTML = `<i class="bi bi-pencil"></i>`;
+		const modifyBtn = document.getElementById("modifyBtn");
+		const deleteBtn = document.getElementById("deleteBtn");
 		
+		// deleteBtn.addEventListener("click", (e) => this.deleteNote(note));
 		
-		// Use this template to add the new modify button
-		// Or toggle between CSS classes
-		`
-		<div class="modal-footer">
-		<div class="form-check">
-			<label class="form-check-label" for="addToArchives">Move to Archives</label>
-			<input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives">
-		</div>
-        <button type="submit" class="btn btn-primary" title="Edit the note" id="editBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
-        <button type="button" class="btn btn-danger" title="Delete the note" id="deleteBtn"><i class="bi bi-trash"></i></button>
-      </div>
-		`
+		// Allow modify/delete options
+		modifyBtn.classList.remove("d-none");
+		deleteBtn.classList.remove("d-none");
 		
 		modifyBtn.addEventListener("click", () => this.modify(note))
 		
@@ -89,13 +92,43 @@ class UI {
 	}
 	
 	modify(note) {
-		console.log(note.id);
 		const correspondingCard = document.getElementById(note.id);
 		note.title = new FormData(document.getElementById("noteUI")).get("note_title");
 		note.body = new FormData(document.getElementById("noteUI")).get("note_body");
 		
 		correspondingCard.querySelector(".card-title").innerText = note.title;
 		correspondingCard.querySelector(".card-text").innerText = note.body;
+		
+		alert("Note modified with success!");
+		
+	}
+	
+	deleteNote() {
+		
+		// To fixs
+		const notes = this.getNotes;
+		console.log(notes);
+		const targetId = this.getTargetNote.id;
+		
+		const newNotes = notes.filter(note => note.id !== targetId);
+		
+		this.setNotes = newNotes;
+		
+		const elementToDelete = document.getElementById(targetId);
+		elementToDelete.remove();
+		
+		// before delete any notes,
+		// confirm user decision
+		console.log(notes);
+		alert("Delete with success!");
+	}
+	
+	get getTargetNote() {
+		return this.#targetNote;
+	}
+	
+	set setTargetNote(note) {
+		this.#targetNote = note;
 	}
 }
 
@@ -110,3 +143,5 @@ class NoteItem {
 
 const ui = new UI();
 document.getElementById("editBtn").addEventListener("click", (e) => ui.createNoteItem());
+document.getElementById("createNewNote").addEventListener("click", (e) => ui.hideBtns());
+document.getElementById("deleteBtn").addEventListener("click", (e) => ui.deleteNote());
