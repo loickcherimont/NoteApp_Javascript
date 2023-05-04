@@ -21,29 +21,29 @@
 		</div>
 		
 		<!-- UI help to indicate user the success/failure of the procedures hidden by default-->
-		<div class="ui-indicator d-none" id="uiIndicator">
-			<p class="alert alert-success" role="alert" id="uiIndicator">
-			<i class="bi bi-check2-circle"></i> Success
-			</p>
-			<p class="alert alert-danger" role="alert" id="uiIndicator">
-			<i class="bi bi-x-circle"></i> Failure
-			</p>
-		</div>
+		<!-- <div class="ui-indicator d-none" id="uiIndicator"> -->
+			<!-- <p class="alert alert-success" role="alert" id="uiIndicator"> -->
+			<!-- <i class="bi bi-check2-circle"></i> Success -->
+			<!-- </p> -->
+			<!-- <p class="alert alert-danger" role="alert" id="uiIndicator"> -->
+			<!-- <i class="bi bi-x-circle"></i> Failure -->
+			<!-- </p> -->
+		<!-- </div> -->
 		
 		<div class="noteinterface row">
 			<!-- NOTEINTERFACE_HEADER: Content a simple title between {My notes, "Note App" or "Take a note"} -->
 			<header class="noteinterface-header mb-5 pb-2 mb-4  d-grid gap-2 d-md-block border-bottom border-dark">
 				<!-- <h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-plus-square"></i></a></h1> -->
 				
-				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote" href="#"><i class="bi bi-plus-square"></i></a></h1>
+				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote" href="#" id="createNewNote"><i class="bi bi-plus-square"></i></a></h1>
 				
 				<!-- Model -->
 				<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
 				
-				<a class="btn btn-primary" role="button" title="Display the archives" id="archivesBtn">Archives</a>
+				<!-- <a class="btn btn-primary" role="button" title="Display the archives" id="archivesBtn">Archives</a> -->
 				
 				<!-- By default, actual is active -->
-				<a class="btn btn-primary active" role="button" title="Display the archives" id="ActualBtn" aria-pressed="true">Actual</a>
+				<!-- <a class="btn btn-primary active" role="button" title="Display the archives" id="ActualBtn" aria-pressed="true">Actual</a> -->
 			</header>
 			
 			
@@ -51,15 +51,15 @@
 			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
 			<section class="noteinterface-body row d-flex" id="noteInterfaceBody">
 				<!-- NOTEITEM : Content a title and a body -->
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-3" >
-					<div class="card border-0 shadow-sm w-75 mx-auto">
-						<div class="card-body">
-							<h5 class="card-title">Note Title</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-				</div>
+				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3" > -->
+					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <h5 class="card-title">Note Title</h5> -->
+							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
+							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
 				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3"> -->
 					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
 						<!-- <div class="card-body"> -->
@@ -120,14 +120,19 @@
           </div>
         </form>
       </div>
+	  <!-- Display by default, when the note is new-->
       <div class="modal-footer">
-		<div class="form-check">
-			<label class="form-check-label" for="addToArchives">Move to Archives</label>
-			<input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives">
-		</div>
-        <button type="submit" class="btn btn-primary" title="Edit the note" id="editBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
-        <button type="button" class="btn btn-danger" title="Delete the note" id="deleteBtn"><i class="bi bi-trash"></i></button>
+		<!-- <div class="form-check"> -->
+			<!-- <label class="form-check-label" for="addToArchives">Move to Archives</label> -->
+			<!-- <input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives"> -->
+		<!-- </div> -->
+        <button type="submit" class="btn btn-primary" title="Edit a new note" id="editBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
+		<!-- Hidden when the note is newly created -->
+        <button type="button" class="btn btn-danger d-none" title="Delete the note" id="deleteBtn" data-bs-dismiss="modal"><i class="bi bi-trash"></i></button>
+		<!-- Hidden when the note is newly created -->
+		<button type="submit" class="btn btn-success d-none" title="Modify the note" id="modifyBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
       </div>
+	  
     </div>
   </div>
 </div>
