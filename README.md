@@ -94,22 +94,23 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 ## :rocket: Features
 <!-- Note Item -->
 - ~~Display to user directy the modal when a new note is created~~
-- Delete the target note from the board when user selects `basket button` and close the modal
+- ~~Delete the target note from the board when user selects `basket button` and close the modal~~
 - Confirm the deletion before delete the note
 
 <!-- UI Helpers -->
-- Create a new note with `+ button`
+- ~~Create a new note with `+ button`~~
 - Find an existing note using the *filterbar*
-- Display to an UI helper when the action is released
+- Display to an UI helper when the action is released (Waiting)
 
 <!-- Note Interface -->
-- Add 2 parts: **Archives** and **Actual**
-- (Save the board in localstorage)
-- Display partially in the board the note when user selects `pencil button` : note title, a part of the note body
-- Delete the target note from the board when user selects `basket button` and close the modal
+- Add 2 parts: **Archives** and **Actual** (Waiting)
+- (Save the board in localstorage) (Waiting)
+- ~~Display partially in the board the note when user selects `pencil button` : note title, a part of the note body~~
+- ~~Delete the target note from the board when user selects `basket button` and close the modal~~
 
 TO FIX!!! 
 There are more than a unique `#modalNote` id
+Absract JS code is not sync with UI
 
 <!-- 
     LICENSE
