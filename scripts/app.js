@@ -31,7 +31,7 @@ class UI {
 		
 		// UI add
 		const noteUIItem = document.createElement("div");
-		noteUIItem.classList.add("col-lg-3", "col-md-6", "col-sm-12", "mb-3", "card-container");
+		noteUIItem.classList.add("col-lg-3", "col-md-6", "col-sm-12", "mb-3", "card-container", "note");
 		noteUIItem.innerHTML = `
 					<div class="card border-0 shadow-sm w-75 mx-auto" id=${id}>
 						<div class="card-body">
@@ -141,7 +141,55 @@ class NoteItem {
 	}
 }
 
+class FilterBar {
+	
+	constructor() {
+		this.input = document.querySelector(".filterbar-input")
+		this.filterBtn = document.getElementById("filterBtn");
+		this.filterBtn.addEventListener("click", (e) => this.filter());
+	}
+	
+	
+	
+	
+	filter() {
+		let title = this.input.value;
+		const notes = document.querySelectorAll(".card");
+		
+		if(!title) {
+			this.reinit();
+			return;
+		}
+		
+		console.log(this.input.value);
+		
+		// Upgrade: More adapted doesn't exist?
+		notes.forEach(note => {
+			const noteTitle = note.querySelector(".card-title").innerText;
+			if(noteTitle === title) {
+				note.classList.remove("d-none", "border-0");
+				note.classList.add("border", "border-primary", "border-2");
+			} else {
+				note.classList.add("d-none");
+			}
+		});
+		
+		this.input.value = null;
+	}
+	
+	reinit() {
+		const notes = document.querySelectorAll(".card");
+		notes.forEach(note => {
+			note.classList.remove("d-none", "border", "border-primary", "border-2")
+			note.classList.add("border-0");
+		});
+		this.input.value = null;
+	}
+}
+
 const ui = new UI();
 document.getElementById("editBtn").addEventListener("click", (e) => ui.createNoteItem());
 document.getElementById("createNewNote").addEventListener("click", (e) => ui.hideBtns());
 document.getElementById("deleteBtn").addEventListener("click", (e) => ui.deleteNote());
+
+const filterBar = new FilterBar();
