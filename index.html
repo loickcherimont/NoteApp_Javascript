@@ -14,8 +14,8 @@
 		<!-- FILTER_BAR: Allow user to find a note using its title -->
 		<div class="input-group mb-3 p-3 filterbar">
 			<!-- <div class="col d-flex"> -->
-				<input type="search" class="form-control filterbar-input border-0" placeholder="Search for a note..." aria-label="Search for a note" aria-describedby="searchForNote">
-				<button class="btn btn-primary filterbar-btn" type="button" id="searchForNote"><i class="bi bi-search"></i></button>
+				<input type="search" class="form-control filterbar-input border-0" placeholder="Search by title" aria-label="Search by title" aria-describedby="filterBtn">
+				<button class="btn btn-primary filterbar-btn" type="button" title="Filter by title" id="filterBtn"><i class="bi bi-search"></i></button>
 			<!-- </div> -->
 			
 		</div>
@@ -51,51 +51,15 @@
 			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
 			<section class="noteinterface-body row d-flex" id="noteInterfaceBody">
 				<!-- NOTEITEM : Content a title and a body -->
-				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3" > -->
-					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
-						<!-- <div class="card-body"> -->
-							<!-- <h5 class="card-title">Note Title</h5> -->
-							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
-							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-						<!-- </div> -->
-					<!-- </div> -->
-				<!-- </div> -->
-				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3"> -->
-					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
-						<!-- <div class="card-body"> -->
-							<!-- <h5 class="card-title">Note Title</h5> -->
-							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
-							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-						<!-- </div> -->
-					<!-- </div> -->
-				<!-- </div> -->
-				<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-3"> -->
-					<!-- <div class="card border-0 shadow-sm w-75 mx-auto"> -->
-						<!-- <div class="card-body"> -->
-							<!-- <h5 class="card-title">Note Title</h5> -->
-							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
-							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-						<!-- </div> -->
-					<!-- </div> -->
-				<!-- </div> -->
-				<!-- <div class="col-lg-3 col-md-6 col-12 mb-3"> -->
-					<!-- <div class="card border-0 bg-white shadow-sm w-75 mx-auto"> -->
-						<!-- <div class="card-body"> -->
-							<!-- <h5 class="card-title">Note Title</h5> -->
-							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
-							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-						<!-- </div> -->
-					<!-- </div> -->
-				<!-- </div> -->
-				<!-- <div class="col-lg-3 col-md-6 col-12 mb-3"> -->
-					<!-- <div class="card border-0 bg-white shadow-sm w-75 mx-auto"> -->
-						<!-- <div class="card-body"> -->
-							<!-- <h5 class="card-title">Note Title</h5> -->
-							<!-- <p class="card-text">Lorem ipsum dolor ...</p> -->
-							<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-						<!-- </div> -->
-					<!-- </div> -->
-				<!-- </div> -->
+				<div class="col-lg-3 col-md-6 col-sm-12 mb-3 note" >
+					<div class="card border-0 shadow-sm w-75 mx-auto">
+						<div class="card-body">
+							<h5 class="card-title">Lorem</h5>
+							<p class="card-text">Lorem ipsum dolor ...</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+						</div>
+					</div>
+				</div>
 			</section>
 
 <!-- Modal use for note edit -->
