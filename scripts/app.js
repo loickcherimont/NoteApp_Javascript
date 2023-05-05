@@ -132,6 +132,7 @@ class UI {
 	}
 }
 
+// Useful?
 class NoteItem {
 	constructor(id, title, body, edited) {
 		this.id = id;
@@ -166,7 +167,7 @@ class FilterBar {
 		// Upgrade: More adapted doesn't exist?
 		notes.forEach(note => {
 			const noteTitle = note.querySelector(".card-title").innerText;
-			if(noteTitle === title) {
+			if(noteTitle.toLowerCase() === title.toLowerCase()) {
 				note.classList.remove("d-none", "border-0");
 				note.classList.add("border", "border-primary", "border-2");
 			} else {
