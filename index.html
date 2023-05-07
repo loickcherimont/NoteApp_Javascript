@@ -1,117 +1,119 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Note App - Vanilla JS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Note App - Vanilla JS</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- CUSTOM CSS -->
 	<link rel="stylesheet" href="./styles/general.css">
-  </head>
-  <body>
+</head>
+
+<body>
 	<div class="app container d-flex flex-column justify-content-around" id="App">
 		<!-- FILTER_BAR: Allow user to find a note using its title -->
 		<div class="input-group mb-3 p-3 filterbar">
-			<!-- <div class="col d-flex"> -->
-				<input type="search" class="form-control filterbar-input border-0" placeholder="Search by title" aria-label="Search by title" aria-describedby="filterBtn">
-				<button class="btn btn-primary filterbar-btn" type="button" title="Filter by title" id="filterBtn"><i class="bi bi-search"></i></button>
-			<!-- </div> -->
-			
+			<input type="search" class="form-control filterbar-input border-0" placeholder="Search by title"
+				aria-label="Search by title" aria-describedby="filterBtn">
+			<button class="btn btn-primary filterbar-btn" type="button" title="Filter by title" id="filterBtn"><i
+					class="bi bi-search"></i></button>
 		</div>
-		
-		<!-- UI help to indicate user the success/failure of the procedures hidden by default-->
-		<!-- <div class="ui-indicator d-none" id="uiIndicator"> -->
-			<!-- <p class="alert alert-success" role="alert" id="uiIndicator"> -->
-			<!-- <i class="bi bi-check2-circle"></i> Success -->
-			<!-- </p> -->
-			<!-- <p class="alert alert-danger" role="alert" id="uiIndicator"> -->
-			<!-- <i class="bi bi-x-circle"></i> Failure -->
-			<!-- </p> -->
-		<!-- </div> -->
-		
+
 		<div class="noteinterface row">
 			<!-- NOTEINTERFACE_HEADER: Content a simple title between {My notes, "Note App" or "Take a note"} -->
 			<header class="noteinterface-header mb-5 pb-2 mb-4  d-grid gap-2 d-md-block border-bottom border-dark">
-				<!-- <h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-plus-square"></i></a></h1> -->
-				
-				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i> Take a note!<a  class="btn btn-outline-secondary ms-2" role="button" title="New note" data-bs-toggle="modal" data-bs-target="#modalNote" href="#" id="createNewNote"><i class="bi bi-plus-square"></i></a></h1>
-				
-				<!-- Model -->
-				<!-- <button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button> -->
-				
-				<!-- <a class="btn btn-primary" role="button" title="Display the archives" id="archivesBtn">Archives</a> -->
-				
-				<!-- By default, actual is active -->
-				<!-- <a class="btn btn-primary active" role="button" title="Display the archives" id="ActualBtn" aria-pressed="true">Actual</a> -->
+				<h1 class="noteinterface-header-title fw-light text-md-start text-center"><i class="bi bi-pencil"></i>
+					Take a note!<a class="btn btn-outline-secondary ms-2" role="button" title="New note"
+						data-bs-toggle="modal" data-bs-target="#modalNote" href="#" id="createNewNote"><i
+							class="bi bi-plus-square"></i></a></h1>
 			</header>
-			
-			
-			
+
+
+
 			<!-- NOTEINTERFACE_BODY: Display all notes made by the user -->
-			<section class="noteinterface-body row d-flex" id="noteInterfaceBody">
-				<!-- NOTEITEM : Content a title and a body -->
-				<div class="col-lg-3 col-md-6 col-sm-12 mb-3 note" >
+			<section class="noteinterface-body row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4" id="noteInterfaceBody">
+
+				<!-- <div class="col note card-container">
 					<div class="card border-0 shadow-sm w-75 mx-auto">
 						<div class="card-body">
-							<h5 class="card-title">Lorem</h5>
-							<p class="card-text">Lorem ipsum dolor ...</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
+							<h5 class="card-title">Title</h5>
+							<p class="card-text">Note content</p>
+							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0"
+								data-bs-toggle="modal" data-bs-target="#modalNote"><i
+									class="bi bi-pencil text-secondary"></i></button>
 						</div>
 					</div>
-				</div>
+				</div> -->
+
 			</section>
 
-<!-- Modal use for note edit -->
-<div class="modal fade" id="modalNote" tabindex="-1" aria-labelledby="modalNoteLabel" aria-hidden="true" data-bs-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title fs-5" id="modalNoteLabel">Start typing!</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">	  
-        
-		<!-- NoteUI to edit/delete/archive a note -->
-		<form id="noteUI" name="note_ui" method="get">
-          <div class="mb-3">
-            <label for="noteTitle" class="col-form-label">Title</label>
-            <input type="text" class="form-control" id="noteTitle" name="note_title" value="">
-          </div>
-          <div class="mb-3">
-            <label for="noteBody" class="col-form-label">Your note</label>
-            <textarea class="form-control" id="noteBody" name="note_body" value=""></textarea>
-          </div>
-        </form>
-      </div>
-	  <!-- Display by default, when the note is new-->
-      <div class="modal-footer">
-		<!-- <div class="form-check"> -->
-			<!-- <label class="form-check-label" for="addToArchives">Move to Archives</label> -->
-			<!-- <input class="form-check-input ps-3" type="checkbox" value="" id="addToArchives"> -->
-		<!-- </div> -->
-        <button type="submit" class="btn btn-primary" title="Edit a new note" id="editBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
-		<!-- Hidden when the note is newly created -->
-        <button type="button" class="btn btn-danger d-none" title="Delete the note" id="deleteBtn" data-bs-dismiss="modal"><i class="bi bi-trash"></i></button>
-		<!-- Hidden when the note is newly created -->
-		<button type="submit" class="btn btn-success d-none" title="Modify the note" id="modifyBtn" data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
-      </div>
-	  
-    </div>
-  </div>
-</div>
-		
-		</div>
-	
+			<!-- Modal use for note edit -->
+			<div class="modal fade" id="modalNote" tabindex="-1" aria-labelledby="modalNoteLabel" aria-hidden="true"
+				data-bs-backdrop="static">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2 class="modal-title fs-5" id="modalNoteLabel">Start typing!</h2>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
 
-	<footer class="py-3 my-4 border-top">
-		<p class="text-center text-muted ">&copy; 2023 Loick Cherimont</p>
-	</footer>
+							<!-- NoteEditor to edit/delete/archive a note -->
+							<form id="noteEditor" name="note_ui" method="get">
+								<div class="mb-3">
+									<label for="noteTitle" class="col-form-label">Title</label>
+									<input type="text" class="form-control" id="noteTitle" name="note_title" value="">
+								</div>
+								<div class="mb-3">
+									<label for="noteBody" class="col-form-label">Your note</label>
+									<textarea class="form-control" id="noteBody" name="note_body" value=""></textarea>
+								</div>
+							</form>
+						</div>
+						<!-- Display by default, when the note is new-->
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" title="Edit a new note" id="editBtn"
+								data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
+							<!-- Hidden when the note is newly created -->
+							<button type="button" class="btn btn-danger d-none" title="Delete the note" id="deleteBtn"
+								data-bs-dismiss="modal"><i class="bi bi-trash"></i></button>
+							<!-- Hidden when the note is newly created -->
+							<button type="submit" class="btn btn-success d-none" title="Modify the note" id="modifyBtn"
+								data-bs-dismiss="modal"><i class="bi bi-pencil"></i></button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<!-- TEMPLATES -->
+		<template id="cardLayout">
+			<div class="card border-0 shadow-sm w-75 mx-auto">
+				<div class="card-body">
+					<h5 class="card-title">Title</h5>
+					<p class="card-text">Note content</p>
+					<button type="button" class="btn btn-primary stretched-link bg-transparent border-0"
+						data-bs-toggle="modal" data-bs-target="#modalNote"><i
+							class="bi bi-pencil text-secondary"></i></button>
+				</div>
+			</div>
+		</template>
+
+
+		<footer class="py-3 my-4 border-top">
+			<p class="text-center text-muted ">&copy; 2023 Loick Cherimont</p>
+		</footer>
 	</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-	<!-- Waiting for a stable localhost -->
-	<!-- <script src="./scripts/app.js" type="module"></script> -->
-	
-	<script src="./scripts/app.js"></script>
-  </body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+
+	<script src="./scripts/app.js" defer></script>
+</body>
+
 </html>
