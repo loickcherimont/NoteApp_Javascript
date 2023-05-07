@@ -9,12 +9,11 @@
 body {
 	background-image: linear-gradient(-20deg, #ffffff 0%, #eaf6f6 100%);
 	background-repeat: no-repeat;
-	height: 100vh;
-}
 
-/* .form-check * { */
-	/* cursor: pointer; */
-/* } */
+	/* Adapt to number of note items */
+	min-height: 100vh;
+	max-height: auto;
+}
 
 /* Animations/Effect on card and input */	
 .card {
