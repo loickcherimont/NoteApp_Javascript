@@ -1,134 +1,117 @@
-// Create/Modify a note 
-class UI {
-	
+/********************************** CLASSES **********************************/
+/** Represents the main class */
+class App {
+
 	#notes = [];
-	#modal;
 	#targetNote;
-	
-	hideBtns () {
+
+	/** @method hideBtns - Prevent user to modify/delete */
+	hideBtns() {
 		const modifyBtn = document.getElementById("modifyBtn");
 		const deleteBtn = document.getElementById("deleteBtn");
-		
+
 		modifyBtn.classList.add("d-none");
 		deleteBtn.classList.add("d-none");
-		
-		const form = document.getElementById("noteUI");
-		form.reset();
+
+		document.getElementById("noteEditor").reset();
 	}
-	
+
+	/** @method createNoteItem - Add a new note on the board using data from #noteEditor */
 	createNoteItem() {
-		
-		const noteData = new FormData(document.getElementById("noteUI"));
+
+		const noteData = new FormData(document.getElementById("noteEditor"));
 		const noteItem = new NoteItem();
-		
-		// Programming add
-		let { id , title, body, edited } = noteItem;
+		let { id, title, body } = noteItem; // Better use simple object ?
+		const noteContainer = document.createElement("div");
+		// noteContainer.classList.add("col-lg-3", "col-md-6", "col-sm-12", "mb-3", "card-container", "note");
+		noteContainer.classList.add("col", "note", "card-container");
+		const UINote = document.getElementById("cardLayout").content.cloneNode(true).querySelector(".card");
+
 		id = `note-${Date.now()}`;
 		title = noteData.get("note_title");
 		body = noteData.get("note_body");
-		
-		
-		
-		// UI add
-		const noteUIItem = document.createElement("div");
-		noteUIItem.classList.add("col-lg-3", "col-md-6", "col-sm-12", "mb-3", "card-container", "note");
-		noteUIItem.innerHTML = `
-					<div class="card border-0 shadow-sm w-75 mx-auto" id=${id}>
-						<div class="card-body">
-							<h5 class="card-title">${title}</h5>
-							<p class="card-text">${body}</p>
-							<button type="button" class="btn btn-primary stretched-link bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#modalNote"><i class="bi bi-pencil text-secondary"></i></button>
-						</div>
-					</div>
-		
-	`;
-		noteUIItem.addEventListener("click", (e) => this.fetchExistingData({id, title, body, edited: true}));
-		this.#modal = noteUIItem;
-		document.getElementById("noteInterfaceBody").prepend(noteUIItem);
-		document.getElementById("noteUI").reset();
-		this.setNotes = {id, title, body, edited:true};
+
+		UINote.id = id;
+		UINote.querySelector(".card-title").innerText = title;
+		UINote.querySelector(".card-text").innerText = body;
+		UINote.addEventListener("click", (e) => this.fetchExistingData({ id, title, body }));
+		noteContainer.appendChild(UINote);
+
+
+		document.getElementById("noteInterfaceBody").prepend(noteContainer);
+		document.getElementById("noteEditor").reset();
+		this.setNotes = { id, title, body };
 		alert("New note created!");
 	}
-	
+
 	fetchExistingData(note) {
-		const {title, body} = note;
-		
+		const { title, body } = note;
 		this.setTargetNote = note;
-		
-		const modal = document.getElementById("modalNote");
-		
-		modal.querySelector("#noteTitle").value = title;
-		modal.querySelector("#noteBody").value = body;
-		
 		const modifyBtn = document.getElementById("modifyBtn");
 		const deleteBtn = document.getElementById("deleteBtn");
-		
-		// deleteBtn.addEventListener("click", (e) => this.deleteNote(note));
-		
+
+		const modal = document.getElementById("modalNote");
+
+		modal.querySelector("#noteTitle").value = title;
+		modal.querySelector("#noteBody").value = body;
+
 		// Allow modify/delete options
 		modifyBtn.classList.remove("d-none");
 		deleteBtn.classList.remove("d-none");
-		
+
 		modifyBtn.addEventListener("click", () => this.modify(note))
-		
-		
+
+
 		modal.querySelector(".modal-footer").appendChild(modifyBtn);
 	}
-	
-	set setNotes(note) {
-		this.#notes.push(note);
-	}
-	
-	set setModal(content) {
-		this.#modal.innerHTML = content;
-	}
-	
-	get getNotes() {
-		return this.#notes;
-	}
-	
-	get getModal() {
-		return this.#modal;
-	}
-	
+
+	/** @todo to fix */
+	/** @method modify - Modify a note using the #noteEditor */
 	modify(note) {
 		const correspondingCard = document.getElementById(note.id);
-		note.title = new FormData(document.getElementById("noteUI")).get("note_title");
-		note.body = new FormData(document.getElementById("noteUI")).get("note_body");
-		
+		note.title = new FormData(document.getElementById("noteEditor")).get("note_title");
+		note.body = new FormData(document.getElementById("noteEditor")).get("note_body");
+
 		correspondingCard.querySelector(".card-title").innerText = note.title;
 		correspondingCard.querySelector(".card-text").innerText = note.body;
-		
+
 		alert("Note modified with success!");
-		
+
 	}
-	
+
 	deleteNote() {
-		
-		// To fixs
-		const notes = this.getNotes;
-		console.log(notes);
+		let notes = this.getNotes;
 		const targetId = this.getTargetNote.id;
-		
-		const newNotes = notes.filter(note => note.id !== targetId);
-		
-		this.setNotes = newNotes;
-		
 		const elementToDelete = document.getElementById(targetId);
-		elementToDelete.remove();
-		
-		// before delete any notes,
-		// confirm user decision
-		console.log(notes);
-		alert("Delete with success!");
+
+		notes = notes.filter(note => note.id !== targetId);
+
+		// Confirm user choice on deletion
+		if (confirm("Are you sure to delete this note?")) {
+			elementToDelete.remove();
+
+			// Feature - Fix: Display the alert asynchronously 
+			alert("Delete with success!");
+		} else {
+			alert("Deletion Cancelled!");
+		}
+
 	}
-	
+
 	get getTargetNote() {
 		return this.#targetNote;
 	}
-	
+
 	set setTargetNote(note) {
 		this.#targetNote = note;
+	}
+
+	set setNotes(note) {
+		this.#notes.push(note);
+	}
+
+	get getNotes() {
+		return this.#notes;
 	}
 }
 
@@ -142,42 +125,60 @@ class NoteItem {
 	}
 }
 
+/**
+ * @class ModalFooter
+ * 
+ * Make the buttons from modal footer functional
+ */
+class ModalFooter {
+
+	constructor(app) {
+
+		document.getElementById("editBtn").addEventListener("click", (e) => app.createNoteItem());
+		/** @todo to fix */
+		document.getElementById("createNewNote").addEventListener("click", (e) => app.hideBtns());
+		document.getElementById("deleteBtn").addEventListener("click", (e) => app.deleteNote());
+
+	}
+}
+
+
+
+// Upkeep OK
 class FilterBar {
-	
+
 	constructor() {
 		this.input = document.querySelector(".filterbar-input")
 		this.filterBtn = document.getElementById("filterBtn");
 		this.filterBtn.addEventListener("click", (e) => this.filter());
 	}
-	
-	
-	
-	
+
+
+
+
 	filter() {
 		let title = this.input.value;
 		const notes = document.querySelectorAll(".card");
-		
-		if(!title) {
+
+		if (!title) {
 			this.reinit();
 			return;
 		}
-		
-		console.log(this.input.value);
-		
+
 		// Upgrade: More adapted doesn't exist?
 		notes.forEach(note => {
 			const noteTitle = note.querySelector(".card-title").innerText;
-			if(noteTitle.toLowerCase() === title.toLowerCase()) {
+			if (noteTitle.toLowerCase() === title.toLowerCase()) {
 				note.classList.remove("d-none", "border-0");
 				note.classList.add("border", "border-primary", "border-2");
 			} else {
 				note.classList.add("d-none");
 			}
 		});
-		
+
 		this.input.value = null;
 	}
-	
+
 	reinit() {
 		const notes = document.querySelectorAll(".card");
 		notes.forEach(note => {
@@ -188,9 +189,7 @@ class FilterBar {
 	}
 }
 
-const ui = new UI();
-document.getElementById("editBtn").addEventListener("click", (e) => ui.createNoteItem());
-document.getElementById("createNewNote").addEventListener("click", (e) => ui.hideBtns());
-document.getElementById("deleteBtn").addEventListener("click", (e) => ui.deleteNote());
-
+/********************************** MAIN **********************************/
+const app = new App();
+const modalButtons = new ModalFooter(app);
 const filterBar = new FilterBar();
