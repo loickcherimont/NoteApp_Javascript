@@ -16,6 +16,16 @@ class App {
 		document.getElementById("noteEditor").reset();
 	}
 
+	showBtns() {
+		const modifyBtn = document.getElementById("modifyBtn");
+		const deleteBtn = document.getElementById("deleteBtn");
+
+		modifyBtn.classList.remove("d-none");
+		deleteBtn.classList.remove("d-none");
+
+		// document.getElementById("noteEditor").reset();
+	}
+
 	/** @method createNoteItem - Add a new note on the board using data from #noteEditor */
 	createNoteItem() {
 
@@ -23,60 +33,70 @@ class App {
 		const noteItem = new NoteItem();
 		let { id, title, body } = noteItem; // Better use simple object ?
 		const noteContainer = document.createElement("div");
-		// noteContainer.classList.add("col-lg-3", "col-md-6", "col-sm-12", "mb-3", "card-container", "note");
 		noteContainer.classList.add("col", "note", "card-container");
-		const UINote = document.getElementById("cardLayout").content.cloneNode(true).querySelector(".card");
+
 
 		id = `note-${Date.now()}`;
 		title = noteData.get("note_title");
 		body = noteData.get("note_body");
 
-		UINote.id = id;
-		UINote.querySelector(".card-title").innerText = title;
-		UINote.querySelector(".card-text").innerText = body;
-		UINote.addEventListener("click", (e) => this.fetchExistingData({ id, title, body }));
-		noteContainer.appendChild(UINote);
+		const UINote = new UiNote({ id, title, body });
+
+		// UINote.id = id;
+		// UINote.querySelector(".card-title").innerText = title;
+		// UINote.querySelector(".card-text").innerText = body;
+		// UINote.addEventListener("click", (e) => this.fetchExistingData({ id, title, body }));
+		noteContainer.appendChild(UINote.html);
+
 
 
 		document.getElementById("noteInterfaceBody").prepend(noteContainer);
-		document.getElementById("noteEditor").reset();
+		// document.getElementById("noteEditor").reset();
 		this.setNotes = { id, title, body };
+
+		this.showBtns();
+
 		alert("New note created!");
 	}
 
-	fetchExistingData(note) {
-		const { title, body } = note;
-		this.setTargetNote = note;
-		const modifyBtn = document.getElementById("modifyBtn");
-		const deleteBtn = document.getElementById("deleteBtn");
+	/** @todo Nothing for this moment */
+	// fetchExistingData(note) {
+	// 	const { title, body } = note;
+	// 	this.setTargetNote = note;
+	// 	const modifyBtn = document.getElementById("modifyBtn");
+	// 	const deleteBtn = document.getElementById("deleteBtn");
 
-		const modal = document.getElementById("modalNote");
+	// 	const modal = document.getElementById("modalNote");
 
-		modal.querySelector("#noteTitle").value = title;
-		modal.querySelector("#noteBody").value = body;
+	// 	modal.querySelector("#noteTitle").value = title;
+	// 	modal.querySelector("#noteBody").value = body;
 
-		// Allow modify/delete options
-		modifyBtn.classList.remove("d-none");
-		deleteBtn.classList.remove("d-none");
+	// 	// Allow modify/delete options
+	// 	// When user wants to an existing note
+	// 	modifyBtn.classList.remove("d-none");
+	// 	deleteBtn.classList.remove("d-none");
+	// }
 
-		modifyBtn.addEventListener("click", () => this.modify(note))
-
-
-		modal.querySelector(".modal-footer").appendChild(modifyBtn);
-	}
-
-	/** @todo to fix */
 	/** @method modify - Modify a note using the #noteEditor */
+	/** @todo Nothing for this moment */
 	modify(note) {
+		console.log("MODIFY");
+		fetchExistingData()
+		const noteEditorData = new FormData(document.getElementById("noteEditor"));
 		const correspondingCard = document.getElementById(note.id);
-		note.title = new FormData(document.getElementById("noteEditor")).get("note_title");
-		note.body = new FormData(document.getElementById("noteEditor")).get("note_body");
+		note.title = noteEditorData.get("note_title");
+		note.body = noteEditorData.get("note_body");
 
 		correspondingCard.querySelector(".card-title").innerText = note.title;
 		correspondingCard.querySelector(".card-text").innerText = note.body;
 
-		alert("Note modified with success!");
+		/** Update noteEditor data ? */
+		// noteEditorData.append("note_title", note.title);
+		// console.log(noteEditorData.get("note_title"));
+		// noteEditorData.append("note_body", note.body);
+		// console.log(noteEditorData.get("note_body"));
 
+		alert("Note modified with success!");
 	}
 
 	deleteNote() {
@@ -137,14 +157,19 @@ class ModalFooter {
 		document.getElementById("editBtn").addEventListener("click", (e) => app.createNoteItem());
 		/** @todo to fix */
 		document.getElementById("createNewNote").addEventListener("click", (e) => app.hideBtns());
-		document.getElementById("deleteBtn").addEventListener("click", (e) => app.deleteNote());
 
+		document.getElementById("modifyBtn").addEventListener("click", () => app.modify(app.getTargetNote))
+		document.getElementById("deleteBtn").addEventListener("click", (e) => app.deleteNote());
 	}
 }
 
 
 
-// Upkeep OK
+/**
+ * @class FilterBar
+ * 
+ * Find one or more note(s)
+ */
 class FilterBar {
 
 	constructor() {
@@ -152,9 +177,6 @@ class FilterBar {
 		this.filterBtn = document.getElementById("filterBtn");
 		this.filterBtn.addEventListener("click", (e) => this.filter());
 	}
-
-
-
 
 	filter() {
 		let title = this.input.value;
@@ -189,7 +211,89 @@ class FilterBar {
 	}
 }
 
+/**
+ * @class NoteUi
+ * 
+ * Represents a note on the UI
+ */
+class UiNote {
+
+	/**
+	 * @constructor
+	 * @param {Object} data - {id: String, title: String, body: String}
+	 */
+	constructor(data) {
+		this.data = data;
+		this.html = document.getElementById("cardLayout").content.cloneNode(true).querySelector(".card");
+
+		const { id, title, body } = this.data;
+
+		this.html.id = id;
+		this.html.querySelector(".card-title").innerText = title;
+		this.html.querySelector(".card-text").innerText = body;
+
+		// console.log(this.html);
+
+
+		// this.html.addEventListener("click", this.fetchExistingData({ id, title, body }));
+	}
+
+	// fetchExistingData(note) {
+
+	// 	// console.log("FETCH NOTE", note);
+
+	// 	/** #noteEditor better than #modal? */
+	// 	const { title, body } = note;
+	// 	// this.setTargetNote = note; Useful?
+	// 	const modifyBtn = document.getElementById("modifyBtn");
+	// 	const deleteBtn = document.getElementById("deleteBtn");
+
+	// 	const modal = document.getElementById("modalNote");
+
+	// 	modal.querySelector("#noteTitle").value = title;
+	// 	modal.querySelector("#noteBody").value = body;
+
+	// 	// Allow modify/delete options
+	// 	// When user wants to an existing note
+	// 	modifyBtn.classList.remove("d-none");
+	// 	deleteBtn.classList.remove("d-none");
+	// }
+
+
+
+	/* UINote.id = id;
+		UINote.querySelector(".card-title").innerText = title;
+		UINote.querySelector(".card-text").innerText = body;
+		UINote.addEventListener("click", (e) => this.fetchExistingData({ id, title, body })); */
+}
+
+
 /********************************** MAIN **********************************/
 const app = new App();
 const modalButtons = new ModalFooter(app);
 const filterBar = new FilterBar();
+// const uiNotes = document.getElementById("noteInterfaceBody").querySelectorAll(".ui-note");
+
+/** @todo Use a class instead! */
+/**************************** FUNCTION ***************************/
+// uiNotes.forEach(uiNote => uiNote.addEventListener("click", fetchExistingData));
+
+
+function fetchExistingData() {
+
+	console.log("FETCHING DATA");
+
+	const { title, body } = note;
+	const modifyBtn = document.getElementById("modifyBtn");
+	const deleteBtn = document.getElementById("deleteBtn");
+
+	const noteEditor = document.getElementById("noteEditor");
+
+	noteEditor.querySelector("#noteTitle").value = title;
+	noteEditor.querySelector("#noteBody").value = body;
+
+	// Allow modify/delete options
+	// When user wants to an existing note
+	modifyBtn.classList.remove("d-none");
+	deleteBtn.classList.remove("d-none");
+}
